@@ -1,5 +1,7 @@
 # AGENTS.md 模板 — 工程规则（最小有效集）
 
+<!-- facts-lint:R-ONLY -->
+
 每条规则必须机械可执行（编译/lint/git 能强制），不带流程性义务。每条带删除条件。例外：AI 可读指令类规则（如 R3）以开工阅读为强制通道，强度低于机械强制，须在该条内如实标注。
 
 ## R1 示例：日志统一门面（lint/审查强制）
@@ -16,8 +18,8 @@
 删除条件：长期单人单会话无并行施工时可删。
 
 ## R4 事实文档（facts-lint 强制）
-根目录 FACTS.md 记全项目事实，每模块一个 FACTS.md 记模块事实：只写现状，新结论改写旧条目，不写过程、未闭环事项和决策叙事。节名白名单、单条 ≤300 字、文件 ≤20KB、禁用词、仓内指针有效性由 `tools/tests/facts-lint.test.js` 强制（随 `node --test tools/tests/*.test.js` 运行）；放宽阈值须用户同意。
+根目录 FACTS.md 记全项目事实，每模块一个 FACTS.md 记模块事实：只写现状，新结论改写旧条目，不写过程、未闭环事项和决策叙事。节名白名单、单条 ≤300 字、文件 ≤20KB、禁用词、仓内指针有效性由 `tools/tests/facts-lint.test.cjs` 强制（随 `npm test` 运行）；放宽阈值须用户同意。
 任务过程记录原样放 `docs/<YYYYMMDD>-<标签>/RECORD.md`，并在对应 FACTS「档案索引」登记一行（孤儿档案与死指针会使 lint 失败）。未闭环事项不入 FACTS；RECORD 原样含过程。
 VERSIONS.md 由 `tools/gen-versions.js` 生成，手写内容会被覆盖勿手改。
 删除条件：FACTS.md 永久但允许重写；lint 阈值可调。
-facts-lint 自检 sha256：7751982a28d04fb732d337b58c5910bea147147e8519dd485e09864cf94260d7（本模板仓的登记值；你的项目改了 tools/tests/facts-lint.test.js 后用同法重算并替换本值，否则自检红；删除方式：删本行与 facts-lint 尾部自检段）。
+facts-lint 自检 sha256：9d2fb0d60a6d97384ae81df13aef516325316bc2f0b83fbcef055fbb10aba8c3（改 tools/tests/facts-lint.test.cjs 后跑 `npm run update-hash` 重登记本值，否则自检红——刻意留痕；删除方式：删本行与 facts-lint 尾部自检段）。

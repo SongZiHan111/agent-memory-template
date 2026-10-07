@@ -1,11 +1,13 @@
 #!/bin/sh
-# pre-push：push 前强制跑离线全量测试，红则拒推。
-# 安装：powershell -File tools/install-hooks.ps1（Windows）或 bash tools/install-hooks.sh
-# 删除：删除 .git/hooks/pre-push。紧急逃生口：git push --no-verify
+# pre-push 本地快速反馈：push 前跑离线全量测试，红则拒推。
+# 注意强度：这是本地提示，不是强制闸机——hooks 不随 git 分发（换机需重装），
+# 且 git push --no-verify 可跳过。真正的强制闸机是 CI（.github/workflows/test.yml）。
+# 安装：powershell -ExecutionPolicy Bypass -File tools/install-hooks.ps1（Windows）或 bash tools/install-hooks.sh
+# 删除：删除 .git/hooks/pre-push。
 cd "$(git rev-parse --show-toplevel)" || exit 1
-node --test tools/tests/*.test.js >/dev/null 2>&1
+node --test "tools/tests/*.test.cjs" >/dev/null 2>&1
 if [ $? -ne 0 ]; then
-  echo "pre-push: tests failed, push blocked. Fix first; emergency escape: git push --no-verify" >&2
+  echo "pre-push: tests failed, push blocked (local gate). Fix first; escape: git push --no-verify" >&2
   exit 1
 fi
 exit 0

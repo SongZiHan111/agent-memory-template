@@ -4,8 +4,12 @@
   "description": "A rot-resistant memory/documentation system for AI-assisted projects: FACTS + AGENTS + frozen archives, enforced by mechanical referees (lint/tests/hooks) instead of rituals.",
   "private": false,
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
-    "test": "node --test tools/tests/*.test.js"
+    "test": "node --test \"tools/tests/*.test.cjs\"",
+    "update-hash": "node tools/update-lint-hash.cjs"
   },
   "keywords": ["agents-md", "ai-agents", "documentation", "context-engineering", "llm", "knowledge-management"]
 }

@@ -49,13 +49,5 @@ tags.forEach((v, i) => {
   L.push('');
 });
 
-const head = sh('git rev-parse HEAD');
-const lastDate = tags.length ? tags[tags.length - 1].date : null;
-const unreleased = archives.filter(a => !lastDate || a.date > lastDate);
-L.push('## 当前工作区（未发布）');
-L.push(`- HEAD：${anchorOf(head)}`);
-L.push(`- 最近 tag 后新增档案：${unreleased.length ? unreleased.map(a => 'docs/' + a.dir + '/').join('、') : '无'}`);
-L.push('');
-
 fs.writeFileSync(path.join(ROOT, 'VERSIONS.md'), L.join('\n'), 'utf8');
 console.log(`VERSIONS.md generated: ${tags.length} tag(s), ${archives.length} archive(s)`);
