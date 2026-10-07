@@ -1,0 +1,11 @@
+{
+  "name": "agent-memory-template",
+  "version": "1.0.0",
+  "description": "A rot-resistant memory/documentation system for AI-assisted projects: FACTS + AGENTS + frozen archives, enforced by mechanical referees (lint/tests/hooks) instead of rituals.",
+  "private": false,
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tools/tests/*.test.js"
+  },
+  "keywords": ["agents-md", "ai-agents", "documentation", "context-engineering", "llm", "knowledge-management"]
+}

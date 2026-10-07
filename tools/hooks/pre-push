@@ -1,0 +1,11 @@
+#!/bin/sh
+# pre-push：push 前强制跑离线全量测试，红则拒推。
+# 安装：powershell -File tools/install-hooks.ps1（Windows）或 bash tools/install-hooks.sh
+# 删除：删除 .git/hooks/pre-push。紧急逃生口：git push --no-verify
+cd "$(git rev-parse --show-toplevel)" || exit 1
+node --test tools/tests/*.test.js >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+  echo "pre-push: tests failed, push blocked. Fix first; emergency escape: git push --no-verify" >&2
+  exit 1
+fi
+exit 0
