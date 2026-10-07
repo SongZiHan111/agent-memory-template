@@ -5,7 +5,7 @@
 # 安装：powershell -ExecutionPolicy Bypass -File tools/install-hooks.ps1（Windows）或 bash tools/install-hooks.sh
 # 删除：删除 .git/hooks/pre-push。
 cd "$(git rev-parse --show-toplevel)" || exit 1
-node --test "tools/tests/*.test.cjs" >/dev/null 2>&1
+node tools/run-tests.cjs >/dev/null 2>&1
 if [ $? -ne 0 ]; then
   echo "pre-push: tests failed, push blocked (local gate). Fix first; escape: git push --no-verify" >&2
   exit 1

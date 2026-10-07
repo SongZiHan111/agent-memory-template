@@ -8,7 +8,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "node --test \"tools/tests/*.test.cjs\"",
+    "test": "node tools/run-tests.cjs",
     "update-hash": "node tools/update-lint-hash.cjs"
   },
   "keywords": ["agents-md", "ai-agents", "documentation", "context-engineering", "llm", "knowledge-management"]
